@@ -1,0 +1,12 @@
+{
+  "branch_name": "master",
+  "result": "failed",
+  "commit": {
+    "id": "ce03782d581ed985caf9c479173a14962b0fe941",
+    "url": "https://github.com/renderedtext/semaphore/commit/ce03782d581ed985caf9c479173a14962b0fe941",
+    "author_name": "markoa",
+    "author_email": "marko@renderedtext.com",
+    "message": "Add es6 file extension to jasmine.yml",
+    "timestamp": "2015-12-07T11:31:38+01:00"
+  }
+}

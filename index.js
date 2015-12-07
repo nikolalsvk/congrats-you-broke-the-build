@@ -13,20 +13,29 @@ exports.handler = function(event, context) {
   var s3 = new AWS.S3({region: 'us-west-2'});
   var params = {Bucket: 'congrats-you-broke-the-build', Key: 'numbers.json'};
 
-  s3.getObject(params, { stream: true }, function(err, data) {
+  s3.getObject(params, function(err, data) {
     if(err) console.log(err, err.stack); // an error has happened
 
     console.log("Successfully read file from S3");
-    fs.writeFile('numbers.json', data, function(err) {
+    var numbers = JSON.parse(data.Body);
+    console.log(numbers);
+    fs.writeFile('numbers.json', data.Body, function(err) {
       if(err) console.log(err, err.stack);
     });
     console.log("Written contents of S3 file to numbers.json");
 
     console.log("Finished GET numbers.json from S3 Bucket");
 
-    var numbersNonJson = fs.readFileSync("numbers.json");
-    var numbers = JSON.parse(numbersNonJson);
-
-    console.log("Numbers from S3: %j", numbers);
+    manipulateNumbers(numbers);
   });
+
+  function manipulateNumbers(numbers) {
+    if(event.branch_name == "master" && event.result == "failed") {
+      var blame = event.commit.author_name;
+      var blame_mail = event.commit.author_email;
+      var number = numbers[blame_mail];
+      console.log("Congrats " + blame + ", you broke the build! Go and buy some kuglice for the office to make up.");
+      console.log(number);
+    };
+  };
 };
