@@ -19,10 +19,6 @@ exports.handler = function(event, context) {
     console.log("Successfully read file from S3");
     var numbers = JSON.parse(data.Body);
     console.log(numbers);
-    fs.writeFile('numbers.json', data.Body, function(err) {
-      if(err) console.log(err, err.stack);
-    });
-    console.log("Written contents of S3 file to numbers.json");
 
     console.log("Finished GET numbers.json from S3 Bucket");
 
