@@ -49,11 +49,12 @@ exports.handler = function(event, context) {
       }, function(err, responseData) { //this function is executed when a response is received from Twilio
         if (!err) {
           console.log(responseData);
+          context.done(null, "Message sent!");
         } else {
           console.log(err);
+          context.done(null, "Error has happened, message was not sent!");
         }
       });
-    context.done(null, "Function complete");
     };
   };
 }
