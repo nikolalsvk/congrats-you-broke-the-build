@@ -1,5 +1,11 @@
 {
   "name": "congrats-you-broke-the-build",
   "version": "0.0.1",
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "aws-sdk": "2.0.23"
+  },
+  "dependencies": {
+    "twilio": "2.1.0"
+  }
 }
