@@ -28,7 +28,6 @@ exports.handler = function(event, context) {
   function manipulateNumbers(numbers) {
    if(event.branch_name == "master" && event.result == "failed") {
       var blame = event.commit.author_name;
-      var blame_mail = event.commit.author_email;
 
       // message that is sent to the one who broke the master branch
       var message = "Congrats " + blame + ", you managed to brake master branch on SemaphoreCI! Go and buy some kuglice for the office to make up."
@@ -38,6 +37,7 @@ exports.handler = function(event, context) {
   };
 
   function twilioHandler(numbers, message) {
+    var blame_mail = event.commit.author_email;
     // twilio params
     var twilio_account_sid = numbers.twilio.twilio_account_sid;
     var twilio_auth_token = numbers.twilio.twilio_auth_token;
