@@ -33,7 +33,9 @@ exports.handler = function(event, context) {
       var message = "Congrats " + blame + ", you managed to brake master branch on SemaphoreCI! Go and buy some kuglice for the office to make up."
 
       twilioHandler(numbers, message);
-    };
+    } else {
+      context.done(null, "Build passed!");
+    }
   };
 
   function twilioHandler(numbers, message) {
